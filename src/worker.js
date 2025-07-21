@@ -32,6 +32,11 @@ async function checkSpamScore(phoneNumber, env) {
 
   const url = `https://lookups.twilio.com/v1/PhoneNumbers/${phoneNumber}?AddOns=nomorobo_spamscore`;
   
+  // Debug: Check if secrets are available
+  if (!env.TWILIO_ACCOUNT_SID || !env.TWILIO_AUTH_TOKEN) {
+    throw new Error(`Twilio secrets not found. SID exists: ${!!env.TWILIO_ACCOUNT_SID}, Token exists: ${!!env.TWILIO_AUTH_TOKEN}`);
+  }
+  
   const response = await fetch(url, {
     method: 'GET',
     headers: {
