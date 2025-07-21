@@ -1,0 +1,26 @@
+{
+  "name": "spam-checker-mcp",
+  "version": "1.0.0",
+  "description": "MCP Server for spam checking phone numbers using Twilio",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --env production",
+    "deploy:staging": "wrangler deploy",
+    "tail": "wrangler tail --env production",
+    "test": "vitest"
+  },
+  "keywords": ["mcp", "spam", "twilio", "cloudflare"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@types/node": "^18.17.5",
+    "typescript": "^5.0.4",
+    "vitest": "^1.0.0",
+    "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "hono": "^4.0.0"
+  }
+}

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  spam-checker-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    container_name: spam-checker-mcp
+    ports:
+      - "8001:8001"
+    environment:
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - MCP_SERVER_HOST=0.0.0.0
+      - MCP_SERVER_PORT=8001
+    restart: unless-stopped
+    networks:
+      - spam-checker-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.spam-mcp.rule=Host(`spam-mcp.yourdomain.com`)"
+      - "traefik.http.routers.spam-mcp.tls.certresolver=letsencrypt"
+      - "traefik.http.services.spam-mcp.loadbalancer.server.port=8001"
+
+networks:
+  spam-checker-network:
+    driver: bridge
