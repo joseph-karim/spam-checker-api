@@ -1,0 +1,28 @@
+# Ignore React app files - we only want the Worker
+node_modules/
+dist/
+build/
+.env*
+*.log
+
+# React specific files to ignore
+src/components/
+src/hooks/
+src/lib/
+src/assets/
+src/main.tsx
+src/App.tsx
+src/index.css
+src/vite-env.d.ts
+
+# Config files for React app
+vite.config.ts
+tailwind.config.js
+tsconfig*.json
+eslint.config.js
+postcss.config.js
+components.json
+index.html
+
+# Keep only worker files
+!src/worker.js
