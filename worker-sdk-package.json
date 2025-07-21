@@ -1,0 +1,17 @@
+{
+  "name": "spam-checker-mcp-worker",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/worker-twilio-sdk.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "twilio": "^4.23.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "wrangler": "^3.0.0"
+  }
+}
