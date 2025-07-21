@@ -1,4 +1,4 @@
-name = "spam-checker-mcp"
+name = "spam-check-mcp2"
 main = "src/worker.js"
 compatibility_date = "2024-09-23"
 
