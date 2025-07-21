@@ -31,12 +31,12 @@ async function checkSpamScore(phoneNumber, env) {
   }
 
   // Check if secrets are available
-  if (!env.TWILIO_ACCOUNT_SID || !env.TWILIO_AUTH_TOKEN || !env.NOMOROBO_ADDON_SID) {
-    throw new Error(`Twilio secrets not found. SID: ${!!env.TWILIO_ACCOUNT_SID}, Token: ${!!env.TWILIO_AUTH_TOKEN}, Addon: ${!!env.NOMOROBO_ADDON_SID}`);
+  if (!env.TWILIO_ACCOUNT_SID || !env.TWILIO_AUTH_TOKEN) {
+    throw new Error(`Twilio secrets not found. SID: ${!!env.TWILIO_ACCOUNT_SID}, Token: ${!!env.TWILIO_AUTH_TOKEN}`);
   }
 
-  // Use the addon SID instead of the generic name
-  const url = `https://lookups.twilio.com/v1/PhoneNumbers/${phoneNumber}?AddOns=${env.NOMOROBO_ADDON_SID}`;
+  // Use nomorobo_spamscore as the addon parameter
+  const url = `https://lookups.twilio.com/v1/PhoneNumbers/${phoneNumber}?AddOns=nomorobo_spamscore`;
   
   const response = await fetch(url, {
     method: 'GET',
@@ -61,10 +61,10 @@ async function checkSpamScore(phoneNumber, env) {
 
   const data = await response.json();
   
-  // Parse Nomorobo score using the addon SID
+  // Parse Nomorobo score from the results
   const addOns = data.add_ons || {};
   const results = addOns.results || {};
-  const nomoroboResult = results[env.NOMOROBO_ADDON_SID] || {};
+  const nomoroboResult = results.nomorobo_spamscore || {};
   
   if (!nomoroboResult || nomoroboResult.status !== 'successful') {
     throw new Error('Failed to retrieve spam score from Nomorobo');
