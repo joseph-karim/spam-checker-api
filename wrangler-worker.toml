@@ -1,0 +1,10 @@
+name = "spam-checker-mcp"
+main = "src/worker.js"
+compatibility_date = "2024-09-23"
+
+# Environment variables (set via wrangler secret)
+# TWILIO_ACCOUNT_SID - set via: wrangler secret put TWILIO_ACCOUNT_SID
+# TWILIO_AUTH_TOKEN - set via: wrangler secret put TWILIO_AUTH_TOKEN
+
+[env.production]
+name = "spam-checker-mcp"
