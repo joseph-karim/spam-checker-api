@@ -1,5 +1,5 @@
 name = "spam-check-mcp2"
-main = "src/worker-sse.js"
+main = "src/worker-mcp-sse.js"
 compatibility_date = "2024-09-23"
 workers_dev = true
 route = { pattern = "spam-check-mcp2.joseph-aae.workers.dev/*", zone_name = "joseph-aae.workers.dev" }
